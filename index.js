@@ -27,31 +27,51 @@ var resizeImage = function(option, width, height, stream, next) {
 };
 
 module.exports = {
-    resize: function(format, width, height, url, next) {
+    resize: function(option, width, height, url, next) {
+        var path = `${__dirname}\\${url}`;
+        var download = false;
+
+        // check if file exists locally        
         try {
-            var path = `${__dirname}\\${url}`;
             fs.accessSync(path);
-            var stream = fs.readFileSync(path);
-            resizeImage(option, width, height, stream, (image) => {
-                var type = mime.lookup(path);
-                next(type, image);
-            });            
         } catch (ex) {
-            // file doesn't exist, try to download file
-            http.get(url).on('response', function(response) {
-                var total = response.headers['content-length']; //total byte length
-                var buffer = [];
-                response.on('data', function(data) {
-                    buffer.push(data);
-                });
-                response.on('end', function() {
-                    var stream = Buffer.concat(buffer);
-                    resizeImage(option, width, height, stream, (image) => {
-                        var type = response.headers['content-type'];
-                        next(type, image);
-                    });
-                });
-            });
+            download = true;
         }
+
+        try {
+
+            if (!download) {
+                // file is on server
+                var stream = fs.readFileSync(path);
+                resizeImage(option, width, height, stream, (image) => {
+                    var type = mime.lookup(path);
+                    next(type, image);
+                });
+
+            } else {
+                // file doesn't exist, try to download file
+                if (url.indexOf('http://')) {
+                    http.get(url).on('response', function(response) {
+                        var total = response.headers['content-length']; //total byte length
+                        var buffer = [];
+                        response.on('data', function(data) {
+                            buffer.push(data);
+                        });
+                        response.on('end', function() {
+                            var stream = Buffer.concat(buffer);
+                            resizeImage(option, width, height, stream, (image) => {
+                                var type = response.headers['content-type'];
+                                next(type, image);
+                            });
+                        });
+                    });
+                } else {
+                    next("text/plain", "Not a valid url");
+                }
+            }
+        } catch (ex) {
+            next("text/plain", "Image not found");
+        }
+
     }
 };
