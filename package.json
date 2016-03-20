@@ -1,6 +1,6 @@
 {
   "name": "node-imager",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simple image resizer using imagemagick",
   "main": "index.js",
   "scripts": {
