@@ -2,6 +2,7 @@ var im = require('imagemagick');
 var fs = require('fs');
 var http = require('http');
 var mime = require('mime');
+var path = require('path');
 
 var resizeImage = function(option, width, height, stream, next) {
     if (option) {
@@ -28,8 +29,8 @@ var resizeImage = function(option, width, height, stream, next) {
 
 module.exports = {
     resize: function(option, width, height, url, next) {
-        var filename = `${__dirname}/${url}`;
-        filename = filename.replace('/node_modules/node-imager', '');
+        var filename = path.join(__dirname, url);
+        filename = filename.replace(`node_modules${path.sep}node-imager${path.sep}`, '');
         var download = false;
 
         // check if file exists locally        
