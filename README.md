@@ -1,8 +1,6 @@
 # node-imager
 a super simple nodejs image resizer
 
-<<<<<<< HEAD
-=======
 **important: this does not support downloading images over https ... yet**
 
 Prerequisites
@@ -59,5 +57,3 @@ app.listen(8080);
 ```
 resize(option, width, height, url, callback);
 ```
-
->>>>>>> 3277578a343debe810bcd734ed080a557e17c79e
