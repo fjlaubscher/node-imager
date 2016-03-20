@@ -29,6 +29,7 @@ var resizeImage = function(option, width, height, stream, next) {
 module.exports = {
     resize: function(option, width, height, url, next) {
         var path = `${__dirname}\\${url}`;
+        path = path.replace('\\node_modules\\node-imager', '');
         var download = false;
 
         // check if file exists locally        
@@ -50,7 +51,7 @@ module.exports = {
 
             } else {
                 // file doesn't exist, try to download file
-                if (url.indexOf('http://')) {
+                if (url.indexOf('http://') >= 0) {
                     http.get(url).on('response', function(response) {
                         var total = response.headers['content-length']; //total byte length
                         var buffer = [];

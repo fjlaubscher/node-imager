@@ -1,6 +1,6 @@
 {
   "name": "node-imager",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple image resizer using imagemagick",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,8 @@
     "resize",
     "imagemagick",
     "resize",
-    "image"
+    "nodejs,",
+    "node"
   ],
   "author": "Francois Laubscher",
   "license": "MIT",
