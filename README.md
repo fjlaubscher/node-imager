@@ -1,9 +1,8 @@
 # node-imager
-a super simple nodejs image resizer
+a super simple nodejs image resizer.
+resize files on disk or over http / https
 
 [npm](https://www.npmjs.com/package/node-imager)
-
-**important: this does not support downloading images over https ... yet**
 
 Prerequisites
 
