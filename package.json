@@ -3,9 +3,6 @@
   "version": "0.0.5",
   "description": "A simple image resizer using imagemagick",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "image",
     "resize",
