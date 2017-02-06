@@ -2,8 +2,6 @@
 a super simple nodejs image resizer.
 resize files on disk or over http / https
 
-[npm](https://www.npmjs.com/package/node-imager)
-
 Prerequisites
 
 -  [ImageMagick](http://www.imagemagick.org/script/binary-releases.php)
@@ -16,27 +14,30 @@ $ npm install node-imager --save
 ##usage
 basic usage example:
 
-```
-var express = require('express');
-var imager = require('node-imager');
-var app = express();
+```javascript
+const express = require('express');
+const imager = require('../index');
+const app = express();
 
-app.get('/imager/', function(req, res) {
-  var height = 150;
-  var width = 150;
-  
-  // node-imager will try to find this image in the root of your application
-  // this can be a url of an image somewhere on the web as well like (http://francoislaubscher.com/img/me-square_250.png)
-  var url = "test.png";
+app.get('/imager/', (req, res) => {  
+  // node-imager will try to find this image relative the root of your application
+  // absolute file paths or urls work too
+  const url = 'http://i.imgur.com/1KDwL1M.png';
+
+  const options = {
+    width: 500,
+    height: 500,
+    format: 'c',
+    url
+  };
   
   // crop image
-  imager.resize('c', width, height, url, (contentType, imageBuffer) => {
+  imager.resizeWith(options, (contentType, imageBuffer) => {
     res.setHeader('Content-Type', contentType);
     res.send(imageBuffer);
   });
 });
-app.listen(8080);
-
+app.listen(3000);
 ```
 
 ##api
@@ -50,11 +51,21 @@ app.listen(8080);
  
  url (String): can be relative path or remote file on the web
                'images/test.png'
-               'http://francoislaubscher.com/img/me-square_250.png' --important to prefix with 'http://'
+               'http://i.imgur.com/1KDwL1M.png' --important to prefix with 'http://'
                
  next: callback function
        (contentType, imageBuffer) => { }
 ```
 ```
 resize(option, width, height, url, callback);
+```
+or
+```
+const options = {
+  width: 500,
+  height: 500,
+  format: 'c',
+  url
+};
+resizeWith(options, callback);
 ```
