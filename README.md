@@ -16,7 +16,7 @@ basic usage example:
 
 ```javascript
 const express = require('express');
-const imager = require('../index');
+const imager = require('node-imager');
 const app = express();
 
 app.get('/imager/', (req, res) => {  
