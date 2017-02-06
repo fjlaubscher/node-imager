@@ -46,7 +46,7 @@ exports.resizeImage = function (options, stream, callback) {
 };
 
 exports.readFile = function (url, callback) {
-  let filename = url;
+  var filename = url;
 
   try {
     // try absolute path first
