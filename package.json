@@ -1,6 +1,6 @@
 {
   "name": "node-imager",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A simple image resizer using imagemagick",
   "main": "index.js",
   "keywords": [
@@ -13,10 +13,10 @@
   ],
   "author": "Francois Laubscher",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/fjlaubscher/node-imager.git"
+    "type": "git",
+    "url": "https://github.com/fjlaubscher/node-imager.git"
   },
-  "engines" : {
+  "engines": {
     "node": ">=4.3.2"
   },
   "engine-strict": true,
