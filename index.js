@@ -7,16 +7,20 @@ function onImageRead (options, stream, callback) {
 }
 
 function resizer (options, callback) {
-  if (new RegExp('http(s)?://', 'i').test(options.url)) {
-    helpers.downloadFile(options.url, (type, data) => {
-      options.mimeType = type;
-      onImageRead(options, data, callback);
-    });
-  } else {
-    helpers.readFile(options.url, (type, data) => {
-      options.mimeType = type;
-      onImageRead(options, data, callback);
-    });
+  try {
+    if (new RegExp('http(s)?://', 'i').test(options.url)) {
+      helpers.downloadFile(options.url, (type, data) => {
+        options.mimeType = type;
+        onImageRead(options, data, callback);
+      });
+    } else {
+      helpers.readFile(options.url, (type, data) => {
+        options.mimeType = type;
+        onImageRead(options, data, callback);
+      });
+    }
+  } catch (ex) {
+    callback('text/plain', 'Error processing image. Probably due to an invalid image url');
   }
 }
 
