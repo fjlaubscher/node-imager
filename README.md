@@ -2,6 +2,8 @@
 a super simple nodejs image resizer.
 resize files on disk or over http / https
 
+[![https://nodei.co/npm/node-imager.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/node-imager.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/node-imager)
+
 Prerequisites
 
 -  [ImageMagick](http://www.imagemagick.org/script/binary-releases.php)
